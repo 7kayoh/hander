@@ -38,14 +38,19 @@ end
 
 local function cacheRank(client)
 	if not cache[client.UserId] then
+		local status = false
 		logger:Info("cache; " .. client.Name .. "'s rank is not cached, caching...")
 		promise.retry(fetchRank, configuration.maxRetries, client, configuration.groupId)
 			:andThen(function(result)
+				status = true
 				table.insert(cache, client.UserId, tonumber(result))
 			end)
 			:catch(function(result)
+				status = true
 				logger:Warn("fetchRank; " .. result)
 			end)
+			
+		repeat wait() until status
 	end
 end
 
@@ -79,6 +84,8 @@ local function onPlayerAdded(client)
 	isUserAuthorized = checkAuthorize(cache[client.UserId])
 	
 	if isUserAuthorized then
+		local interface = script.UI:Clone()
+		interface.Parent = client.PlayerGui
 		--TODO: Interface
 	end
 end
@@ -95,6 +102,8 @@ local function init()
 	
 	remoteEvent.Name = "Hander_Event"
 	remoteFunction.Name = "Hander_Function"
+	Players.PlayerAdded:Connect(onPlayerAdded)
+	Players.PlayerRemoving:Connect(onPlayerRemoving)
 	remoteEvent.OnServerEvent:Connect(onCall)
 	remoteFunction.OnServerInvoke = onInvoke
 	remoteEvent.Parent, remoteFunction.Parent = ReplicatedStorage, ReplicatedStorage
