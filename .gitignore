@@ -1,0 +1,10 @@
+# Project place file
+/Hander.rbxlx
+
+# Roblox Studio lock files
+/*.rbxlx.lock
+/*.rbxl.lock
+
+# etc files
+.DS_STORE
+.nova
