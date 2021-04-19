@@ -5,7 +5,7 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local configuration = require(script.Configuration)
 local common = ReplicatedStorage:WaitForChild("Common")
 local promise = require(common:WaitForChild("Promise"))
-local logger = require(common:WaitForChild("logger")).new(script.Name)
+local logger = require(common:WaitForChild("Logger")).new(script.Name)
 local remoteEvent, remoteFunction = nil, nil
 local cache = {}
 
@@ -23,7 +23,7 @@ end
 
 local function checkAuthorize(rank: number)
 	for index = 1, #configuration.ranks do
-		local item = configuration.ranks[i]
+		local item = configuration.ranks[index]
 		if type(item) == "string" and string.match(item, configuration.pattern) then
 			local condition, itemRank = string.match(item, configuration.pattern)
 			local difference = rank - tonumber(itemRank)
@@ -49,12 +49,12 @@ local function cacheRank(client)
 	end
 end
 
-local function onInvoke(client, type: string, attachment)
+local function onInvoke(client, protocol: string, attachment)
 	local isUserAuthorized = false
 	cacheRank(client)
 	isUserAuthorized = checkAuthorize(cache[client.UserId])
-	
-	if type == "send" and isUserAuthorized then
+	warn(isUserAuthorized)
+	if protocol == "send" and isUserAuthorized then
 		local targetName, toolName = attachment.target, attachment.toolName
 		local target, tool = Players:FindFirstChild(targetName or ""), client.Character:FindFirstChild(toolName or "")
 		if target and tool then
@@ -97,4 +97,7 @@ local function init()
 	remoteFunction.Name = "Hander_Function"
 	remoteEvent.OnServerEvent:Connect(onCall)
 	remoteFunction.OnServerInvoke = onInvoke
+	remoteEvent.Parent, remoteFunction.Parent = ReplicatedStorage, ReplicatedStorage
 end
+
+init()
