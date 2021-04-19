@@ -3,8 +3,9 @@ local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
 local configuration = require(script.Configuration)
-local promise = require(ReplicatedStorage:WaitForChild("Promise"))
-local logger = require(ReplicatedStorage:WaitForChild("logger")).new(script.Name)
+local common = ReplicatedStorage:WaitForChild("Common")
+local promise = require(common:WaitForChild("Promise"))
+local logger = require(common:WaitForChild("logger")).new(script.Name)
 local remoteEvent, remoteFunction = nil, nil
 local cache = {}
 
