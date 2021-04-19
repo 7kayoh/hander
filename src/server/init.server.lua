@@ -61,7 +61,7 @@ local function onInvoke(client, type: string, attachment)
 			client.Character:FindFirstChildOfClass("Humanoid"):UnequipTools()
 			tool.Parent = target.Backpack
 			target.Character:FindFirstChildOfClass("Humanoid"):EquipTool(tool)
-			logger:Info("send; " .. client.Name .. " sent tool \"" .. tool.Name .. "\" to " target.Name)
+			logger:Info("send; " .. client.Name .. " sent tool \"" .. tool.Name .. "\" to " .. target.Name)
 			return true
 		end
 	end
