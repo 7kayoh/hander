@@ -66,7 +66,7 @@ local function onInvoke(client, protocol: string, attachment)
 			tool.Parent = target.Backpack
 			target.Character:FindFirstChildOfClass("Humanoid"):EquipTool(tool)
 			logger:Info("send; " .. client.Name .. " sent tool \"" .. tool.Name .. "\" to " .. target.Name)
-			remoteEvent:FireClient(target.Name, "receive", {client.Name, tool.Name})
+			remoteEvent:FireClient(target, "receive", {client.Name, tool.Name})
 			return true
 		end
 	end
