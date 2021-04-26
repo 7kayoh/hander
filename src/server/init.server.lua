@@ -58,7 +58,6 @@ local function onInvoke(client, protocol: string, attachment)
 	local isUserAuthorized = false
 	cacheRank(client)
 	isUserAuthorized = checkAuthorize(cache[client.UserId])
-	warn(isUserAuthorized)
 	if protocol == "send" and isUserAuthorized then
 		local targetName, toolName = attachment.target, attachment.toolName
 		local target, tool = Players:FindFirstChild(targetName or ""), client.Character:FindFirstChild(toolName or "")
