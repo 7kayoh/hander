@@ -32,10 +32,8 @@ Hander uses the following libraries/softwares:
 - [EtiLibs/Logger](https://www.roblox.com/library/6600363372/EtiLibs)
 - [EtiLibs/Lang](https://www.roblox.com/library/6600363372/EtiLibs)
 - [Promise](https://github.com/evaera/roblox-lua-promise)
-- [Roact](https://github.com/Roblox/roact)
-- [JanitorPromise](https://github.com/howmanysmall/Janitor)
 - [spr](https://github.com/Fraktality/spr/)
-- [fzy](https://github.com/swarn/fzy-lua)
+- [Matcher](https://github.com/rgieseke/textredux/blob/main/util/matcher.lua)
 - [Rojo](https://rojo.space/)
 
 ## License
