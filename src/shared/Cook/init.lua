@@ -75,7 +75,9 @@ function Hander:Deploy()
 			
 			Item.Trigger.MouseButton1Click:Connect(function()
 				local Tool = game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("Tool")
-				ReplicatedStorage:WaitForChild("Hander_Function"):InvokeServer("send", {["target"] = Item.Input.Text, ["toolName"] = Tool.Name})
+				if Tool then
+					ReplicatedStorage:WaitForChild("Hander_Function"):InvokeServer("send", {["target"] = Item.Input.Text, ["toolName"] = Tool.Name})
+				end
 				self.Properties.Toggled = false
 				self:Deploy()
 			end)

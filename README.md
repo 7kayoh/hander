@@ -1,18 +1,6 @@
 # Hander
 Simple and open sourced hand-to utility, for your roleplay game's needs.
 
-## Warning!
-This project is still under construction, expect unfinished feature and poorly formatted code!
-
-## What's not done
-
-- List fetching
-- Actual design for the interface
-- Basically the UI
-- Yep, it's the UI
-- Not even functional yet
-- Just a prototype, for now.
-
 ## Getting Started
 To build the place from scratch, use:
 
@@ -25,6 +13,11 @@ Next, open `Hander.rbxlx` in Roblox Studio and start the Rojo server:
 ```bash
 rojo serve
 ```
+
+## Setting up feedback
+By default, Hander do not send any feedback back to the user, and the person who received the tool. To implement feedbacks, you can connect the RemoteEvent Hander uses, which is `Hander_Event`. After that, simply check whether the first parameter is `receive`, if so, the second parameter will be: `{client's name, tool's name}`.
+
+To implement feedback for the original sender, simply just use the boolean returned by the RemoteFunction call inside `Shared.Cook.init.lua`, where true means successful, false means fail.
 
 ## Credits
 Hander uses the following libraries/softwares:
